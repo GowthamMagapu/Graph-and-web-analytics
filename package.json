@@ -1,0 +1,26 @@
+{
+  "name": "graphpulse",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GraphPulse - graph-powered web & product analytics for SaaS businesses",
+  "scripts": {
+    "setup": "npm install && npm install --prefix server && npm install --prefix web",
+    "lite": "npm run build --prefix web && node server/src/lite.js",
+    "lite:start": "node server/src/lite.js",
+    "infra:up": "docker compose up -d --wait",
+    "infra:down": "docker compose down",
+    "migrate": "npm run migrate --prefix server",
+    "dev": "concurrently -n server,web -c blue,yellow \"npm run dev --prefix server\" \"npm run dev --prefix web\"",
+    "dev:server": "npm run dev --prefix server",
+    "dev:web": "npm run dev --prefix web",
+    "simulate": "npm run simulate --prefix server --",
+    "test": "npm test --prefix server",
+    "build": "npm run build --prefix web"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

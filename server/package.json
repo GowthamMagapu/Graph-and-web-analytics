@@ -1,0 +1,34 @@
+{
+  "name": "@graphpulse/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "GraphPulse ingestion, stream worker and GraphQL API",
+  "scripts": {
+    "migrate": "node src/migrate.js",
+    "ingest": "node src/ingest.js",
+    "worker": "node src/worker.js",
+    "api": "node src/api.js",
+    "dev": "concurrently -n ingest,worker,api -c cyan,magenta,green \"node --watch src/ingest.js\" \"node --watch src/worker.js\" \"node --watch src/api.js\"",
+    "simulate": "node scripts/simulate.js",
+    "test": "node --test",
+    "lite": "node src/lite.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.3",
+    "express": "^5.2.1",
+    "graphql": "^17.0.2",
+    "graphql-yoga": "^5.24.1",
+    "ioredis": "^6.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "kafkajs": "^2.2.4",
+    "neo4j-driver": "^6.2.0",
+    "nodemailer": "^10.0.10",
+    "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}

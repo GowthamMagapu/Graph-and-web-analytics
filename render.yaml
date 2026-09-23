@@ -1,0 +1,23 @@
+# Render Blueprint: deploys GraphPulse lite as a single free web service.
+# Render dashboard -> New -> Blueprint -> pick this repository.
+services:
+  - type: web
+    name: graphpulse
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm ci --include=dev --prefix server && npm ci --include=dev --prefix web && npm run build
+    startCommand: node server/src/lite.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "24"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SITE_API_KEY
+        generateValue: true
+      - key: ADMIN_EMAIL
+        sync: false # you'll be asked for it when creating the Blueprint
+      - key: ADMIN_PASSWORD
+        sync: false
